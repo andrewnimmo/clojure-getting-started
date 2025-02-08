@@ -7,7 +7,17 @@
    [ring.util.response]
    [clojure.java.jdbc :as jdbc]
    [ring.util.http-response :as response])
+  (:import
+    org.jscience.physics.amount.Amount
+    org.jscience.physics.model.RelativisticModel
+    javax.measure.unit.SI)
   )
+
+(defn convert [request]
+  (layout/plain
+    (let [energy-amount (Amount/valueOf "12 GeV")]
+      (do (RelativisticModel/select)
+          (str "E=mc^2: " energy-amount " = " (.to energy-amount SI/KILOGRAM))))))
 
 (defn home [request]
   (layout/render request "home.html"))
@@ -24,4 +34,5 @@
    {:middleware [middleware/wrap-csrf
                  middleware/wrap-formats]}
    ["/" {:get home}]
+   ["/convert" {:get convert}]
    ["/database" {:get database}]])

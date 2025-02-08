@@ -19,6 +19,7 @@
                  [org.clojure/clojure "1.11.1"]
                  [org.clojure/tools.cli "1.0.214"]
                  [org.clojure/tools.logging "1.2.4"]
+                 [org.jscience/jscience "4.3.1"]
                  [org.postgresql/postgresql "42.3.2"]
                  [ring/ring-core "1.9.6"]
                  [ring/ring-defaults "0.3.4"]
