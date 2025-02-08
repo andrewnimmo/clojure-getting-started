@@ -16,3 +16,4 @@ profiles.clj
 .vscode
 /node_modules
 /log
+/.env
