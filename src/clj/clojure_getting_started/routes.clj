@@ -14,10 +14,12 @@
   )
 
 (defn convert [request]
-  (layout/plain
-    (let [energy-amount (Amount/valueOf "12 GeV")]
-      (do (RelativisticModel/select)
-          (str "E=mc^2: " energy-amount " = " (.to energy-amount SI/KILOGRAM))))))
+  (layout/plain (let [energy-env (System/getenv "ENERGY")]
+                  (if (nil? energy-env)
+                    "ENERGY environment variable is not set!"
+                    (let [energy-amount (Amount/valueOf energy-env)]
+                      (do (RelativisticModel/select)
+                          (str "E=mc^2: " energy-amount " = " (.to energy-amount SI/KILOGRAM))))))))
 
 (defn home [request]
   (layout/render request "home.html"))
